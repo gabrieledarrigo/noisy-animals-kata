@@ -80,7 +80,7 @@ describe("NoisyAnimal", function () {
     it("quiet hadedahs do not exist", function () {
       const animal = new NoisyAnimal("hadedah");
 
-      expect(animal.makeNoise({ loud: false })).toThrow(/no such thing/);
+      expect(() => animal.makeNoise({ loud: false })).toThrow(/no such thing/);
     });
   });
 });

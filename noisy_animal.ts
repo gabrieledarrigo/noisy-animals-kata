@@ -5,20 +5,19 @@ export class NoisyAnimal {
     this.species = species;
   }
 
-  makeNoise({ loud = true } = {}) {
+  makeNoise({ loud = true } = {}): any {
     if (this.isBird() && !loud) {
-      this.makeBirdNoise(false);
+      return this.makeBirdNoise(false);
     }
     if (loud) {
       if (this.mammalNoise()) {
-        console.log(this.mammalNoise());
-        console.log(this.mammalNoise());
+        return this.mammalNoise() + "\n" + this.mammalNoise() + "\n";
       }
       if (this.isBird()) {
-        this.makeBirdNoise(true);
+        return this.makeBirdNoise(true);
       }
     } else if (["cat", "dog", "leopard"].includes(this.species)) {
-      console.log(this.mammalNoise());
+      return this.mammalNoise() + "\n";
     }
   }
 
@@ -30,29 +29,36 @@ export class NoisyAnimal {
     }[this.species];
   }
 
-  makeBirdNoise(isLoud = true) {
+  makeBirdNoise(isLoud = true): string {
+    const result = [];
+
     if (this.species === "hadedah") {
-      console.log("squawk");
+      result.push("squawk");
     } else if (this.species === "eagle") {
-      console.log("caw");
+      result.push("caw");
     } else {
-      console.log("hoot");
+      result.push("hoot");
     }
+
     if (isLoud) {
       if (this.species === "owl") {
-        console.log("hoot");
+        console.log("OWL");
+
+        result.push("hoot");
       }
       if (this.species === "eagle") {
-        console.log("caw");
+        result.push("caw");
       }
       if (this.species === "hadedah") {
-        console.log("squawk");
+        result.push("squawk");
       }
     } else {
       if (this.species === "hadedah") {
         throw new Error("there is no such thing as a quiet hadedah!");
       }
     }
+
+    return result.join("\n") + "\n";
   }
 
   isBird() {
